@@ -1,0 +1,27 @@
+.content {
+    width: 800px;
+    margin-bottom: 0;
+}
+
+.hole-game {
+    width: 800px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.hole {
+    width: 150px;
+    height: 150px;
+    margin: 0 15px 30px;
+    background: gray;
+    border-radius: 50%;
+}
+
+.hole_has-mole {
+    background-image: url("../image/mole.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: brown;
+}
