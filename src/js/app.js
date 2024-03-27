@@ -41,7 +41,7 @@ export default class MoleGame {
         gameCell.insertBefore(counterHit, firstHole);
         const holes = document.querySelectorAll('.hole');
         holes.forEach((hole) => {
-            hole.addEventListener('onclick', () => {
+            holes.addEventListener('onclick', () => {
                 if (hole.contains('hole_has-mole')) {
                     this.score ++;
                     console.log(this.score)
