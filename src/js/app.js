@@ -15,6 +15,7 @@ export default class MoleGame {
             allField.appendChild(field);
         }
         this.randomHole();
+        this.logicHit();
     }
 
     // перемещение крота на случайное поле
@@ -28,31 +29,72 @@ export default class MoleGame {
                 }
             }
             const rand = Math.floor(Math.random() * this.fieldSize);
-            holes[rand].classList.add('hole_has-mole'); // Была ошибка здесь, нужно добавить 'hole_' перед 'has-mole'
+            holes[rand].classList.add('hole_has-mole');
         }, 1000);
     }
 
-    logicHit() {
-        const counterHit = document.createElement('div');
-        counterHit.classList.add('counter');
+    gameOver() {
+        alert('Вы проиграли, попробуйте еще раз!');
+        this.miss = 0;
+        const counterMiss = document.getElementsByClassName('miss');
+        counterMiss.textContent = `Количество промахов: ${this.miss}`;
+        this.score = 0;
+        const counterHit = document.getElementsByClassName('hit');
         counterHit.textContent = `Количество попаданий: ${this.score}`;
+        this.pass = 0;
+    }
+
+    logicHit() {
         const gameCell = document.querySelector('.content');
         const firstHole = gameCell.firstElementChild;
-        gameCell.insertBefore(counterHit, firstHole);
         const holes = document.querySelectorAll('.hole');
-        holes.forEach((hole) => {
-            holes.addEventListener('onclick', () => {
-                if (hole.contains('hole_has-mole')) {
-                    this.score ++;
-                    console.log(this.score)
-                } else {
-                    this.miss ++;
-                }
+
+        const counterHit = document.createElement('div');
+        counterHit.classList.add('hit');
+        counterHit.textContent = `Количество попаданий: ${this.score}`;
+        gameCell.insertBefore(counterHit, firstHole);
+
+        const counterMiss = document.createElement('div');
+        counterMiss.classList.add('miss');
+        counterMiss.textContent = `Количество промахов: ${this.miss}`;
+        gameCell.insertBefore(counterMiss, firstHole);
+
+        let pass = 0;
+        setInterval(() => {
+            pass ++;
+            console.log(pass);
+        }, 1000);
+
+        if (pass == 5) {
+            alert('Вы проиграли, попробуйте еще раз!');
+            this.miss = 0;
+            counterMiss.textContent = `Количество промахов: ${this.miss}`;
+            this.score = 0;
+            counterHit.textContent = `Количество попаданий: ${this.score}`;
+            pass = 0;
+        } else {
+            holes.forEach((hole) => {
+                hole.addEventListener('click', () => {
+                    if (this.miss < 4 && pass < 4) {
+                        if (hole.classList.contains('hole_has-mole')) {
+                            this.score ++;
+                            counterHit.textContent = `Количество попаданий: ${this.score}`;
+                            pass = 0;
+                        } else {
+                            this.miss ++;
+                            counterMiss.textContent = `Количество промахов: ${this.miss}`;
+                            pass = 0;
+                        }
+                    } else {
+                        alert('Вы проиграли, попробуйте еще раз!');
+                        this.miss = 0;
+                        counterMiss.textContent = `Количество промахов: ${this.miss}`;
+                        this.score = 0;
+                        counterHit.textContent = `Количество попаданий: ${this.score}`;
+                        pass = 0;
+                    }
+                })
             })
-        })
+        }
     }
 }
-
-const newGame = new MoleGame(4);
-newGame.creatingField();
-newGame.logicHit();

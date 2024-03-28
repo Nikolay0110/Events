@@ -26,7 +26,14 @@
     background-color: brown;
 }
 
-.counter {
+.hit {
     font-size: 24px;
     margin-bottom: 20px;
+    color: rgb(0, 165, 88);
+}
+
+.miss {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: rgb(255, 42, 4);
 }

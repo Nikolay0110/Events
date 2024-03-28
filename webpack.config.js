@@ -11,6 +11,7 @@ module.exports = {
         static: '/home/nikolay/Projects/JavaScript_HW/modules/dist/main.html',
         open: true
     },
+    devtool: 'source-map',
     module: {
         rules: [
             {

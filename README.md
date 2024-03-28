@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/tr4f1l9k0k7gejrl?svg=true)](https://ci.appveyor.com/project/Nikolay0110/events)
+
 # Домашнее задание к занятию "3.Обработка событий"
 
 Правила сдачи задания:
